@@ -1,0 +1,13 @@
+{%extends 'ToDo/layout.html'%}
+{%block content%}
+<h3 class = "center-align red lighten-3">{{Task.title}}</h3>
+<div class ="card">
+	<div class="card-content">
+	{{Task.body}}
+	</div>
+<div class ="card-action">
+	{{Task.created_at}}
+</div>
+</div>
+<a href= "/ToDo" class ="btn">go back </a>
+{%endblock%}

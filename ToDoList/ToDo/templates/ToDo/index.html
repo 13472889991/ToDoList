@@ -1,0 +1,10 @@
+{% extends 'ToDo/layout.html' %}
+{% block content %}
+
+
+<h3 class="center-align red lighten-3"> {{title}} </h3>
+<ul class = "collection">
+{% for task in tasks%}
+<li class="collection-item"><a href="/ToDo/details/{{task.id}}">{{task.title}}</li>
+{%endfor%}
+{% endblock %}
