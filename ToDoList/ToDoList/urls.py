@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
+from ToDo import views as ToDo_views
 from django.urls import path, include, re_path
+from django.conf import settings
 
 urlpatterns = [
     re_path(r'^login/$', auth_views.login,name='login'),
     re_path(r'^logout/$',auth_views.logout,{'next_page' : '/'}, name='logout'),
+    re_path(r'^signup/$', ToDo_views.signup, name='signup'),
+    re_path(r'^logout/$',ToDo_views.logout,{'next_page':settings.LOGOUT_REDIRECT_URL},name='logout'),
     path('admin/', admin.site.urls),
     path('',include('ToDo.urls')),
 
