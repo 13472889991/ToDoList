@@ -17,10 +17,11 @@ from . import views
 
 from django.contrib import admin
 from django.urls import path, include, re_path
-
-urlpatterns = [
+app_name='ToDo'
+urlpatterns = [ 
     
     re_path(r'^ToDo/details/(?P<id>\d+)/$', views.details, name='details'),
+    re_path(r'^ToDo/create/$',views.create, name="create"),
     path('', views.index,name="index"),
     path('ToDo/',views.toDo, name = "todo")
 ]

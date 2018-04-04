@@ -4,10 +4,12 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from django.contrib.auth import logout
+from django.views.generic import CreateView, UpdateView, DeleteView
+from . import forms
 
 
 def toDo(request):
-	tasks = Task.objects.all()[:10]
+	tasks = Task.objects.filter(author=request.user)
 	context = {
 	'title' :'Uncompleted tasks',
 	'tasks' : tasks
@@ -49,3 +51,14 @@ def index(request):
 		'login' : 'Login/Signup'
 		}
 	return render(request,'ToDo/index.html',context)
+def create(request):
+	if request.method == 'POST':
+		form = forms.CreateHabit(request.POST, request.FILES)
+		if form.is_valid():
+			instance = form.save(commit = False)
+			instance.author = request.user
+			instance.save()
+			return redirect('ToDo:index')
+	else:
+		form = forms.CreateHabit()
+	return render(request,'ToDo/create.html',{'form':form})
